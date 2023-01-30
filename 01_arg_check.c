@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:48:06 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/01/30 18:56:47 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/01/30 21:13:36 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 
 
 t_cmnd_line	*ft_open_fds(int argv, char **argl);
-char	***ft_get_cmnds(int argv, char **argl);
-char	**ft_get_path(char **envp);
+char		***ft_get_cmnds(int argv, char **argl);
+char		**ft_get_path(char **envp);
+t_cmnd_line	*ft_check_access(char **paths, t_cmnd_line *args);
 
 
-t_comnd_line    *ft_arg_check(int argv, char **argl, char **envp)
+t_cmnd_line	*ft_arg_check(int argv, char **argl, char **envp)
 {
 	s_cmnd_line	*args;
 	int			i;
@@ -28,14 +29,15 @@ t_comnd_line    *ft_arg_check(int argv, char **argl, char **envp)
 
 	if (argv != 5)
 	{	
-		ft_printf("Error in input quantity.\n Try: ./pipex <infile> <comand1> <comand2> <outfile>\n");
+		ft_putstr_fd(2, "Error.\n");
+		ft_putstr_fd(1, "Number of variables different from 5.\n");
 		return(NULL);
 	}
 	args = ft_open_fds(argv, argl);
 	if (!args)
 		return (NULL);
-	path = ft_get_path(envp);
-	if (!path)
+	paths = ft_get_path(envp);
+	if (!(args->path))
 		(free(args), NULL);
 	args->cmnds = ft_get_cmnds(argv, argl);
 	if (!(args->comnds))
@@ -93,7 +95,22 @@ char	**ft_get_path(char **envp)
 		env_path = (ft_strnchr(env[++i], "PATH", 4));
 	if (!(ft_strnchr(envp)))
 		return (NULL);
-	//printf("%s\n", envp[i]);
 	path = ft_split(&env_path[5], ':');
 	return (path);
+}
+
+t_cmnd_line	*ft_check_access(char **paths, t_cmnd_line *args)
+{
+	char	*full_path;
+	char	***aux_c;
+	int		i;
+	int		j;
+
+
+	aux_c = args->cmnds;
+	i = 0;
+	while(aux_c[i])
+	{
+		
+	}
 }

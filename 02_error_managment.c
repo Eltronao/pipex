@@ -6,21 +6,11 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:57:22 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/01/30 18:46:03 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/01/30 19:35:03 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-int ft_errors(int e_code)
-{
-    if (e_code == 1)
-    {
-        write(2, "An error ocurred while checking arguments\n");
-        return(0);
-    }
-    
-}
 
 char    *ft_triple_free(char ***ptr)
 {
