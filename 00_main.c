@@ -6,11 +6,13 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 14:47:13 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/01/30 16:00:18 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/01/30 18:56:42 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+extern char	**environ;
 
 int	main(int argv, char **argl, char **envp)
 {
