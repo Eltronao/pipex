@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 14:47:22 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/01/30 19:44:06 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/02/03 08:42:26 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
-//# include <libft/libft.h>
+# include "libft/libft.h"
+
 
 
 typedef struct s_cmnd_line{
@@ -25,6 +26,8 @@ typedef struct s_cmnd_line{
 	int		fd_out;
 	char	***cmnds;
 	char	**path;
-}	t_comnd_line;
+}	t_cmnd_line;
+
+t_cmnd_line	*ft_arg_check(int argv, char **argl, char **envp);
 
 #endif

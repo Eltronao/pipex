@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:48:06 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/01/30 21:13:36 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/02/03 08:38:09 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,28 +22,33 @@ t_cmnd_line	*ft_check_access(char **paths, t_cmnd_line *args);
 
 t_cmnd_line	*ft_arg_check(int argv, char **argl, char **envp)
 {
-	s_cmnd_line	*args;
+	struct s_cmnd_line	*args;
 	int			i;
 	int			j;
 	char		**path;
 
 	if (argv != 5)
 	{	
-		ft_putstr_fd(2, "Error.\n");
-		ft_putstr_fd(1, "Number of variables different from 5.\n");
+		ft_putstr_fd("Error.\n", 2);
+		ft_putstr_fd("Number of variables different from 5.\n", 1);
 		return(NULL);
 	}
 	args = ft_open_fds(argv, argl);
 	if (!args)
 		return (NULL);
-	paths = ft_get_path(envp);
+	path = ft_get_path(envp);
 	if (!(args->path))
-		(free(args), NULL);
-	args->cmnds = ft_get_cmnds(argv, argl);
-	if (!(args->comnds))
 		return (free(args), NULL);
-	ft_check_access()
+	args->cmnds = ft_get_cmnds(argv, argl);
+	if (!(args->cmnds))
+		return (free(args), NULL);
+	args = ft_check_access(path, args);
+	if (!args)
+		return (ft_free_struct);
+	return (args);
 }
+
+//t_cmnd_line	*ft_open_fds(int argv, char **argl)
 
 t_cmnd_line	*ft_open_fds(int argv, char **argl)
 {
@@ -57,7 +62,6 @@ t_cmnd_line	*ft_open_fds(int argv, char **argl)
 	if (args->fd_out < 0)
 		return (free(args), NULL);
 	return (args);
-	
 }
 
 char	***ft_get_cmnds(int argv, char **argl)
@@ -87,15 +91,25 @@ char	**ft_get_path(char **envp)
 {
 	char	**path;
 	char	*env_path;
+	char	*bar_add;
 	int		i;
 
 	i = 0;
-	env_path = (ft_strnchr(env[0], "PATH", 4));
+	env_path = (ft_strnstr(envp[0], "PATH", 4));
 	while(env_path == NULL)
-		env_path = (ft_strnchr(env[++i], "PATH", 4));
+		env_path = (ft_strnstr(envp[++i], "PATH", 4));
 	if (!(ft_strnchr(envp)))
 		return (NULL);
 	path = ft_split(&env_path[5], ':');
+	i = -1;
+	while (path[++i])
+	{
+		bar_add = ft_strjoin(path[i], "/");
+		if (bar_add == NULL)
+			return(ft_double_free());
+		free(path[i]);
+		path[i] = bar_add;
+	}
 	return (path);
 }
 
@@ -104,13 +118,26 @@ t_cmnd_line	*ft_check_access(char **paths, t_cmnd_line *args)
 	char	*full_path;
 	char	***aux_c;
 	int		i;
+	int		err;
 	int		j;
 
-
 	aux_c = args->cmnds;
-	i = 0;
-	while(aux_c[i])
+	i = -1;
+	while(aux_c[++i])
 	{
-		
+		j = -1;
+		while (paths[++j])
+		{
+			full_path = ft_strjoin(paths[j], aux_c[i][0]);
+			err = access(full_path, F_OK);
+			if (err == 0)
+			{
+				free(aux_c[i][0]);
+				aux_c[i][0] = full_path;
+				break;
+			}
+				free(full_path);
+		}
 	}
+	return (args);
 }
