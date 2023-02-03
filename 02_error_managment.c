@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:57:22 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/01/30 19:35:03 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/02/03 09:31:01 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,9 @@ char    *ft_triple_free(char ***ptr)
     }
     free(ptr);
     return (NULL);
+}
+
+void    *ft_free_struct(t_cmnd_line *cmnds, int case)
+{
+    
 }

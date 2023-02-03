@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:48:06 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/02/03 08:38:09 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/02/03 09:29:40 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,9 @@ t_cmnd_line	*ft_check_access(char **paths, t_cmnd_line *args);
 
 t_cmnd_line	*ft_arg_check(int argv, char **argl, char **envp)
 {
-	struct s_cmnd_line	*args;
+	t_cmnd_line	*args;
 	int			i;
 	int			j;
-	char		**path;
 
 	if (argv != 5)
 	{	
@@ -36,15 +35,15 @@ t_cmnd_line	*ft_arg_check(int argv, char **argl, char **envp)
 	args = ft_open_fds(argv, argl);
 	if (!args)
 		return (NULL);
-	path = ft_get_path(envp);
+	args->path = ft_get_path(envp);
 	if (!(args->path))
-		return (free(args), NULL);
+		return (ft_free_struct(args, 0));
 	args->cmnds = ft_get_cmnds(argv, argl);
 	if (!(args->cmnds))
-		return (free(args), NULL);
-	args = ft_check_access(path, args);
+		return (ft_free_struct(args, 1));
+	args = ft_check_access(args->path, args);
 	if (!args)
-		return (ft_free_struct);
+		return (ft_free_struct(args, 2));
 	return (args);
 }
 
@@ -96,9 +95,9 @@ char	**ft_get_path(char **envp)
 
 	i = 0;
 	env_path = (ft_strnstr(envp[0], "PATH", 4));
-	while(env_path == NULL)
+	while(!env_path && envp[i])
 		env_path = (ft_strnstr(envp[++i], "PATH", 4));
-	if (!(ft_strnchr(envp)))
+	if (!env_path)
 		return (NULL);
 	path = ft_split(&env_path[5], ':');
 	i = -1;

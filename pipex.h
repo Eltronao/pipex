@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 14:47:22 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/02/03 08:42:26 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/02/03 09:10:58 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,8 @@ typedef struct s_cmnd_line{
 }	t_cmnd_line;
 
 t_cmnd_line	*ft_arg_check(int argv, char **argl, char **envp);
+
+
+void		*ft_free_struct(t_cmnd_line *cmnds, int case);
 
 #endif
