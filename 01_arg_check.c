@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   01_arg_check.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lagonzal <larraingonzalez@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:48:06 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/02/03 09:29:40 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/02/06 20:51:01 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ t_cmnd_line	*ft_check_access(char **paths, t_cmnd_line *args);
 t_cmnd_line	*ft_arg_check(int argv, char **argl, char **envp)
 {
 	t_cmnd_line	*args;
-	int			i;
-	int			j;
 
 	if (argv != 5)
 	{	
@@ -37,17 +35,15 @@ t_cmnd_line	*ft_arg_check(int argv, char **argl, char **envp)
 		return (NULL);
 	args->path = ft_get_path(envp);
 	if (!(args->path))
-		return (ft_free_struct(args, 0));
+		return (ft_free_struct(args, 1));
 	args->cmnds = ft_get_cmnds(argv, argl);
 	if (!(args->cmnds))
-		return (ft_free_struct(args, 1));
+		return (ft_free_struct(args, 2));
 	args = ft_check_access(args->path, args);
 	if (!args)
 		return (ft_free_struct(args, 2));
 	return (args);
 }
-
-//t_cmnd_line	*ft_open_fds(int argv, char **argl)
 
 t_cmnd_line	*ft_open_fds(int argv, char **argl)
 {
@@ -59,7 +55,10 @@ t_cmnd_line	*ft_open_fds(int argv, char **argl)
 		return (free(args), NULL);
 	args->fd_out = open(argl[argv - 1], O_WRONLY);
 	if (args->fd_out < 0)
+	{
+		close(args->fd_in);
 		return (free(args), NULL);
+	}
 	return (args);
 }
 
@@ -79,11 +78,11 @@ char	***ft_get_cmnds(int argv, char **argl)
 	{
 		cmnds[i] = ft_split(argl[j], ' ');
 		if (!cmnds[i])
-			return (ft_double_free(cmnds));
+			return (NULL);
 		i++;
 		j++;
 	}
-
+	return (cmnds);
 }
 
 char	**ft_get_path(char **envp)
@@ -105,7 +104,7 @@ char	**ft_get_path(char **envp)
 	{
 		bar_add = ft_strjoin(path[i], "/");
 		if (bar_add == NULL)
-			return(ft_double_free());
+			return(NULL);
 		free(path[i]);
 		path[i] = bar_add;
 	}

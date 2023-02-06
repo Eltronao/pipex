@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   00_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lagonzal <larraingonzalez@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 14:47:13 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/02/03 08:43:22 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/02/06 21:04:23 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ extern char	**environ;
 
 int	main(int argv, char **argl, char **envp)
 {
-	t_cmnd_line	*arg;
+	t_cmnd_line	*args;
 
-	arg = ft_arg_check(argv, argl, envp);
+	args = ft_arg_check(argv, argl, envp);
+	ft_free_struct(args, 2);
 }
