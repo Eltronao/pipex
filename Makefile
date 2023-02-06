@@ -50,6 +50,8 @@ clean:
 fclean: clean
 	$(RM) $(NAME)
 	$(MAKE) fclean -C $(LIB_DIR)
+
 re: fclean all
 	$(MAKE) fclean -C $(LIB_DIR)
+
 .PHONY: all clean fclean re
