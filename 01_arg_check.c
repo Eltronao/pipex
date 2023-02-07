@@ -6,7 +6,7 @@
 /*   By: lagonzal <larraingonzalez@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:48:06 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/02/06 20:51:01 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/02/07 12:48:03 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 t_cmnd_line	*ft_open_fds(int argv, char **argl);
 char		***ft_get_cmnds(int argv, char **argl);
 char		**ft_get_path(char **envp);
-t_cmnd_line	*ft_check_access(char **paths, t_cmnd_line *args);
 
 
 t_cmnd_line	*ft_arg_check(int argv, char **argl, char **envp)
@@ -32,16 +31,19 @@ t_cmnd_line	*ft_arg_check(int argv, char **argl, char **envp)
 	}
 	args = ft_open_fds(argv, argl);
 	if (!args)
-		return (NULL);
+		return (ft_free_struct(args, -1));
 	args->path = ft_get_path(envp);
 	if (!(args->path))
 		return (ft_free_struct(args, 1));
 	args->cmnds = ft_get_cmnds(argv, argl);
 	if (!(args->cmnds))
+	{
 		return (ft_free_struct(args, 2));
-	args = ft_check_access(args->path, args);
-	if (!args)
-		return (ft_free_struct(args, 2));
+	}
+	if (ft_check_access(&args) == -1)
+	{
+		return (ft_free_struct(args, 3));
+	}
 	return (args);
 }
 
@@ -73,15 +75,17 @@ char	***ft_get_cmnds(int argv, char **argl)
 		return (NULL);
 	cmnds[argv - 3] = NULL;
 	i = 0;
-	j = 1;
+	j = 2;
 	while (i < argv - 3)
 	{
 		cmnds[i] = ft_split(argl[j], ' ');
 		if (!cmnds[i])
 			return (NULL);
+		printf("Comand added: %s\n", cmnds[i][0]);
 		i++;
 		j++;
 	}
+	printf("A\n");
 	return (cmnds);
 }
 
@@ -109,33 +113,4 @@ char	**ft_get_path(char **envp)
 		path[i] = bar_add;
 	}
 	return (path);
-}
-
-t_cmnd_line	*ft_check_access(char **paths, t_cmnd_line *args)
-{
-	char	*full_path;
-	char	***aux_c;
-	int		i;
-	int		err;
-	int		j;
-
-	aux_c = args->cmnds;
-	i = -1;
-	while(aux_c[++i])
-	{
-		j = -1;
-		while (paths[++j])
-		{
-			full_path = ft_strjoin(paths[j], aux_c[i][0]);
-			err = access(full_path, F_OK);
-			if (err == 0)
-			{
-				free(aux_c[i][0]);
-				aux_c[i][0] = full_path;
-				break;
-			}
-				free(full_path);
-		}
-	}
-	return (args);
 }

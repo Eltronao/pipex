@@ -14,11 +14,13 @@ NAME = pipex
 
 SRCS =	00_main.c\
 		01_arg_check.c \
-		02_error_managment.c
+		02_error_managment.c\
+		03_access_check.c
 
-OBJS = 00_main.o\
+OBJS =	00_main.o\
 		01_arg_check.o \
-		02_error_managment.o
+		02_error_managment.o \
+		03_access_check.o
 
 LIB_DIR = libft
 
@@ -26,7 +28,7 @@ LIB = libft.a
 
 INCLUDE = -I $(LIB_DIR)
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 
 RM = rm
 

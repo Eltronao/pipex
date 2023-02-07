@@ -6,7 +6,7 @@
 /*   By: lagonzal <larraingonzalez@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 14:47:22 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/02/06 20:46:43 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/02/07 12:46:41 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,7 @@ t_cmnd_line	*ft_arg_check(int argv, char **argl, char **envp);
 
 
 void		*ft_free_struct(t_cmnd_line *cmnds, int e_type);
+
+int			ft_check_access(t_cmnd_line **args);
 
 #endif
