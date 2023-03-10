@@ -30,7 +30,7 @@ INCLUDE = -I $(LIB_DIR)
 
 CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 
-RM = rm
+RM = rm -f
 
 CC = gcc
 
@@ -39,10 +39,8 @@ all: $(NAME)
 %o:%c
 	$(CC) $(CFLAGS) -c $(SRCS)
 
-$(LIB):
-	$(MAKE) -C $(LIB_DIR)
-
 $(NAME): $(OBJS) $(LIB)
+	$(MAKE) -C $(LIB_DIR)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(INCLUDE) $(LIB_DIR)/$(LIB)
 
 clean:
@@ -54,6 +52,5 @@ fclean: clean
 	$(MAKE) fclean -C $(LIB_DIR)
 
 re: fclean all
-	$(MAKE) fclean -C $(LIB_DIR)
 
 .PHONY: all clean fclean re
