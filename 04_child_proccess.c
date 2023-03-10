@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-child_proccess(int rp, int fd[2], t_cmnd_line *args)
+void	child_proccess(int rp, int fd[2], t_cmnd_line *args)
 {
-    first_cmnd()
-    middle_cmnds()
+	first_cmnd();
+	middle_cmnds();
 }

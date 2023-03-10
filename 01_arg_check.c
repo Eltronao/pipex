@@ -3,21 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   01_arg_check.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <larraingonzalez@gmail.com>       +#+  +:+       +#+        */
+/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:48:06 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/02/07 12:48:03 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/03/10 18:32:05 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-
-
 t_cmnd_line	*ft_open_fds(int argv, char **argl);
 char		***ft_get_cmnds(int argv, char **argl);
 char		**ft_get_path(char **envp);
-
 
 t_cmnd_line	*ft_arg_check(int argv, char **argl, char **envp)
 {
@@ -27,7 +24,7 @@ t_cmnd_line	*ft_arg_check(int argv, char **argl, char **envp)
 	{	
 		ft_putstr_fd("Error.\n", 2);
 		ft_putstr_fd("Number of variables different from 5.\n", 1);
-		return(NULL);
+		return (NULL);
 	}
 	args = ft_open_fds(argv, argl);
 	if (!args)
@@ -98,7 +95,7 @@ char	**ft_get_path(char **envp)
 
 	i = 0;
 	env_path = (ft_strnstr(envp[0], "PATH", 4));
-	while(!env_path && envp[i])
+	while (!env_path && envp[i])
 		env_path = (ft_strnstr(envp[++i], "PATH", 4));
 	if (!env_path)
 		return (NULL);
@@ -108,7 +105,7 @@ char	**ft_get_path(char **envp)
 	{
 		bar_add = ft_strjoin(path[i], "/");
 		if (bar_add == NULL)
-			return(NULL);
+			return (NULL);
 		free(path[i]);
 		path[i] = bar_add;
 	}

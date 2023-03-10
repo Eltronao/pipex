@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   02_error_managment.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <larraingonzalez@gmail.com>       +#+  +:+       +#+        */
+/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:57:22 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/02/07 16:33:17 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/03/10 18:27:08 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_double_free(void **ptr);
 void	ft_close_fds(t_cmnd_line *args);
 void	ft_write_error(int e_type);
 
-void    *ft_free_struct(t_cmnd_line *args, int e_type)
+void	*ft_free_struct(t_cmnd_line *args, int e_type)
 {
 	ft_write_error(e_type);
 	if (e_type == 0)
@@ -44,7 +44,7 @@ void	ft_write_error(int e_type)
 {
 	ft_putstr_fd("Error.\n", 2);
 	if (e_type == -1)
-		ft_putstr_fd("An error ocurred while opening the fds.\n", 1)
+		ft_putstr_fd("An error ocurred while opening the fds.\n", 1);
 	else if (e_type == 1)
 		ft_putstr_fd("An error ocurred while working with PATH.\n", 1);
 	else if (e_type == 2)
@@ -67,22 +67,22 @@ void	ft_double_free(void **ptr)
 
 	i = 0;
 	while (ptr[i])
-        {
-            free(ptr[i]);
-            i++;
-        }
-    free(ptr);
+	{
+		free(ptr[i]);
+		i++;
+	}
+	free(ptr);
 }
 
 void	ft_triple_free(void ***ptr)
 {
-    int     i;
+	int	i;
 
-    i = 0;
-    while (ptr[i])
-    {
-        ft_double_free(ptr[i]);
-        i++;
-    }
-    free(ptr);
+	i = 0;
+	while (ptr[i])
+	{
+		ft_double_free(ptr[i]);
+		i++;
+	}
+	free(ptr);
 }

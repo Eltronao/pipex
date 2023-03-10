@@ -12,7 +12,7 @@
 
 #include "pipex.h"
 
-int ft_pathfinder(char ***aux_c, char **paths);
+int	ft_pathfinder(char ***aux_c, char **paths);
 
 int	ft_check_access(t_cmnd_line **args)
 {
@@ -21,7 +21,7 @@ int	ft_check_access(t_cmnd_line **args)
 
 	aux_c = args[0]->cmnds;
 	i = -1;
-	while(aux_c[++i])
+	while (aux_c[++i])
 	{
 		if (ft_pathfinder(&aux_c[i], args[0]->path) == -1)
 			return (-1);
@@ -29,11 +29,11 @@ int	ft_check_access(t_cmnd_line **args)
 	return (0);
 }
 
-int ft_pathfinder(char ***aux_c, char **paths)
+int	ft_pathfinder(char ***aux_c, char **paths)
 {
-	char    *full_path;
-	int     err;
-	int     j;
+	char	*full_path;
+	int		err;
+	int		j;
 
 	err = -1;
 	j = -1;
@@ -50,7 +50,7 @@ int ft_pathfinder(char ***aux_c, char **paths)
 			free(full_path);
 	}
 	if (err == -1)
-		return(-1);
+		return (-1);
 	else
 		return (0);
 }

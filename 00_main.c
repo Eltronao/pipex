@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   00_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <larraingonzalez@gmail.com>       +#+  +:+       +#+        */
+/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 14:47:13 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/02/07 16:44:47 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/03/10 18:32:41 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ int	main(int argv, char **argl, char **envp)
 	else
 	{
 		if (args)
-		ft_free_struct(args, 2);
+			ft_free_struct(args, 2);
 	}	
 }

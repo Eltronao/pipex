@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <larraingonzalez@gmail.com>       +#+  +:+       +#+        */
+/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 14:47:22 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/02/07 12:46:41 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/03/10 18:31:24 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,16 @@
 # include <stdlib.h>
 # include "libft/libft.h"
 
-
-
-typedef struct s_cmnd_line{
-    int		fd_in;
+typedef struct s_cmnd_line
+{
+	int		fd_in;
 	int		fd_out;
 	char	***cmnds;
 	char	**path;
 }	t_cmnd_line;
 
 t_cmnd_line	*ft_arg_check(int argv, char **argl, char **envp);
-
-
 void		*ft_free_struct(t_cmnd_line *cmnds, int e_type);
-
 int			ft_check_access(t_cmnd_line **args);
 
 #endif
