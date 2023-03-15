@@ -12,24 +12,9 @@
 
 #include "pipex.h"
 
-int	ft_pathfinder(char ***aux_c, char **paths);
+char	*ft_pathfinder(char *aux_c, char **paths);
 
-int	ft_check_access(t_cmnd_line **args)
-{
-	char	***aux_c;
-	int		i;
-
-	aux_c = args[0]->cmnds;
-	i = -1;
-	while (aux_c[++i])
-	{
-		if (ft_pathfinder(&aux_c[i], args[0]->path) == -1)
-			return (-1);
-	}
-	return (0);
-}
-
-int	ft_pathfinder(char ***aux_c, char **paths)
+char	*ft_pathfinder(char *aux_c, char **paths)
 {
 	char	*full_path;
 	int		err;
@@ -39,18 +24,19 @@ int	ft_pathfinder(char ***aux_c, char **paths)
 	j = -1;
 	while (paths[++j] && err != 0)
 	{
-		full_path = ft_strjoin(paths[j], aux_c[0][0]);
+		full_path = ft_strjoin(paths[j], aux_c);
 		err = access(full_path, F_OK);
-		if (err == 0)
-		{
-			free(aux_c[0][0]);
-			aux_c[0][0] = full_path;
-		}
-		else
+		if (err != 0)
 			free(full_path);
 	}
 	if (err == -1)
-		return (-1);
+		return (NULL);
 	else
-		return (0);
+		return (full_path);
 }
+
+/*/	if (ft_check_access(&args) == -1)
+	{
+		return (ft_free_struct(args, 3));
+	}
+*/

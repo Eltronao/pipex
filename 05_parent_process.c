@@ -1,17 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   04_child_proccess.c                                :+:      :+:    :+:   */
+/*   05_parent_process.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lagonzal <larraingonzalez@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/07 16:44:27 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/02/07 16:44:27 by lagonzal         ###   ########.fr       */
+/*   Created: 2023/03/15 19:53:11 by lagonzal          #+#    #+#             */
+/*   Updated: 2023/03/15 19:53:11 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	child_proccess(int rp, int fd[2], t_cmnd_line *args)
+#include "pipex.h"
+
+void	parent_process(int fd[2], t_cmnd_line *args, char **envp)
 {
-	first_cmnd();
-	middle_cmnds();
+	char	*path;
+
+	dup2(fd[0], 0);
+	dup2(args->fd_out, 1);
+	close(fd[1]);
+	path = ft_pathfinder(args->cmnds[1][0], args->path);
+	if (execve(path, args->cmnds[1], envp) == -1)
+	{
+		perror("execve");
+		exit(EXIT_FAILURE);
+	}
 }

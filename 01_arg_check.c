@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   01_arg_check.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lagonzal <larraingonzalez@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:48:06 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/03/10 18:32:05 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/03/15 20:18:53 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,7 @@ t_cmnd_line	*ft_arg_check(int argv, char **argl, char **envp)
 	{
 		return (ft_free_struct(args, 2));
 	}
-	if (ft_check_access(&args) == -1)
-	{
-		return (ft_free_struct(args, 3));
-	}
+
 	return (args);
 }
 
@@ -49,10 +46,10 @@ t_cmnd_line	*ft_open_fds(int argv, char **argl)
 	t_cmnd_line	*args;
 
 	args = malloc(sizeof(t_cmnd_line));
-	args->fd_in = open(argl[0], O_RDONLY);
+	args->fd_in = open(argl[0], O_RDONLY, 0777);
 	if (args->fd_in < 0)
 		return (free(args), NULL);
-	args->fd_out = open(argl[argv - 1], O_WRONLY);
+	args->fd_out = open(argl[argv - 1], O_WRONLY, 0777);
 	if (args->fd_out < 0)
 	{
 		close(args->fd_in);
@@ -78,11 +75,9 @@ char	***ft_get_cmnds(int argv, char **argl)
 		cmnds[i] = ft_split(argl[j], ' ');
 		if (!cmnds[i])
 			return (NULL);
-		printf("Comand added: %s\n", cmnds[i][0]);
 		i++;
 		j++;
 	}
-	printf("A\n");
 	return (cmnds);
 }
 
