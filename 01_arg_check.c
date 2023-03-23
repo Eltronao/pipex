@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   01_arg_check.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <larraingonzalez@gmail.com>       +#+  +:+       +#+        */
+/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:48:06 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/03/15 20:18:53 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/03/23 22:58:55 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,7 @@ t_cmnd_line	*ft_arg_check(int argv, char **argl, char **envp)
 		return (ft_free_struct(args, 1));
 	args->cmnds = ft_get_cmnds(argv, argl);
 	if (!(args->cmnds))
-	{
 		return (ft_free_struct(args, 2));
-	}
-
 	return (args);
 }
 
@@ -46,10 +43,10 @@ t_cmnd_line	*ft_open_fds(int argv, char **argl)
 	t_cmnd_line	*args;
 
 	args = malloc(sizeof(t_cmnd_line));
-	args->fd_in = open(argl[0], O_RDONLY, 0777);
+	args->fd_in = open(argl[1], O_RDONLY, 0777);
 	if (args->fd_in < 0)
 		return (free(args), NULL);
-	args->fd_out = open(argl[argv - 1], O_WRONLY, 0777);
+	args->fd_out = open(argl[argv - 1],  O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (args->fd_out < 0)
 	{
 		close(args->fd_in);

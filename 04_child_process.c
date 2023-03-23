@@ -32,6 +32,8 @@ void	child_process(int fd[2], t_cmnd_line *args, char **envp)
 	dup2(args->fd_in, 0);
 	close(fd[0]);
 	path = ft_pathfinder(args->cmnds[0][0], args->path);
+	if (!path)
+		exit(EXIT_FAILURE);
 	if (execve(path, args->cmnds[0], envp) == -1)
 	{
 		perror("execve");

@@ -43,19 +43,19 @@ CC = gcc
 all: $(NAME)
 
 %o:%c
-	$(CC) $(CFLAGS) -c $(SRCS)
+	@$(CC) $(CFLAGS) -c $(SRCS)
 
 $(NAME): $(OBJS)
-	$(MAKE) -C $(LIB_DIR)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(INCLUDE) $(LIB_DIR)/$(LIB)
+	@$(MAKE) -C $(LIB_DIR)
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(INCLUDE) $(LIB_DIR)/$(LIB)
 
 clean:
-	$(RM) $(OBJS)
-	$(MAKE) clean -C $(LIB_DIR)
+	@$(RM) $(OBJS)
+	@$(MAKE) clean -C $(LIB_DIR)
 
 fclean: clean
-	$(RM) $(NAME)
-	$(MAKE) fclean -C $(LIB_DIR)
+	@$(RM) $(NAME)
+	@$(MAKE) fclean -C $(LIB_DIR)
 
 re: fclean all
 
