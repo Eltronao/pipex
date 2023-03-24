@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:57:22 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/03/23 22:28:39 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/03/24 13:22:11 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	*ft_free_struct(t_cmnd_line *args, int e_type)
 
 void	ft_write_error(int e_type)
 {
-	// if (e_type >= -1 && e_type < 5)
-	// 	ft_putstr_fd("Error.\n", 2);
+	if (e_type >= -1 && e_type < 5)
+		ft_putstr_fd("Error.\n", 2);
 	if (e_type == -1)
 		ft_putstr_fd("An error ocurred while opening the fds.\n", 2);
 	else if (e_type == 1)

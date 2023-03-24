@@ -12,7 +12,7 @@
 
 #include "pipex.h"
 
-void print_args(char ***args)
+void	print_args(char ***args)
 {
 	int	m;
 	int	n;
@@ -20,10 +20,10 @@ void print_args(char ***args)
 	m = -1;
 	while (args[++m])
 	{
-		printf("%d: ", m + 1);
+		ft_printf("%d: ", m + 1);
 		n = -1;
 		while (args[m][++n])
 			printf("%s ", args[m][n]);
-		printf("\n");
+		ft_printf("\n");
 	}
 }

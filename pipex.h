@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lagonzal <larraingonzalez@gmail.com>       +#+  +:+       +#+        */
+/*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 14:47:22 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/03/15 20:10:56 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/03/24 13:23:04 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include "libft/libft.h"
-#include <sys/types.h>
-#include <sys/wait.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 
 typedef struct s_cmnd_line
 {
@@ -37,5 +37,5 @@ void		parent_process(int fd[2], t_cmnd_line *args, char **envp);
 
 /*=================UTILS====================================*/
 
-void print_args(char ***args);
+void		print_args(char ***args);
 #endif

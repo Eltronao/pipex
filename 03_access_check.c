@@ -22,6 +22,8 @@ char	*ft_pathfinder(char *aux_c, char **paths)
 
 	err = -1;
 	j = -1;
+	if (access(aux_c, F_OK) == 0)
+		return (aux_c);
 	while (paths[++j] && err != 0)
 	{
 		full_path = ft_strjoin(paths[j], aux_c);

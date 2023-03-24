@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 14:47:13 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/03/23 22:15:57 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/03/24 13:21:14 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	main(int argv, char **argl, char **envp)
 	int			fd[2];
 	int			id;
 
+	if (!envp)
+		return (1);
 	args = ft_arg_check(argv, argl, envp);
 	if (!args)
 		return (1);
@@ -28,9 +30,7 @@ int	main(int argv, char **argl, char **envp)
 	}
 	id = fork();
 	if (id == 0)
-	{
 		child_process(fd, args, envp);
-	}
 	else
 	{
 		waitpid(id, NULL, 0);

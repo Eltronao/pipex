@@ -6,7 +6,7 @@
 /*   By: lagonzal <lagonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:48:06 by lagonzal          #+#    #+#             */
-/*   Updated: 2023/03/23 22:58:55 by lagonzal         ###   ########.fr       */
+/*   Updated: 2023/03/24 13:23:38 by lagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_cmnd_line	*ft_open_fds(int argv, char **argl)
 	args->fd_in = open(argl[1], O_RDONLY, 0777);
 	if (args->fd_in < 0)
 		return (free(args), NULL);
-	args->fd_out = open(argl[argv - 1],  O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	args->fd_out = open(argl[argv - 1], O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (args->fd_out < 0)
 	{
 		close(args->fd_in);
